@@ -12,14 +12,10 @@ public class WayTooMany : MonoBehaviour
 
     void Start()
     {
-        CreateMany(createX, createY, createZ);
+        Invoke("Create", 2);
     }
 
-    void Update()
-    {
-
-    }
-
+    void Create() => CreateMany(createX, createY, createZ);
 
     void CreateMany(int _x, int _y, int _z)
     {
@@ -34,8 +30,18 @@ public class WayTooMany : MonoBehaviour
                 }
             }
         }
+
+        Invoke("DestroyMany", 10);
     }
 
+    void DestroyMany()
+    {
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
+        Invoke("Create", 5);
+    }
 
 
 }
